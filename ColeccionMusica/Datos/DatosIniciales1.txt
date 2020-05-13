@@ -1,0 +1,9 @@
+Diego,2020-05-04
+4
+Cheo Feliciano,false,1935-07-03,1957-10-05
+Janis Joplin,false,1943-01-19,1966-07-04
+Marcos Witt,true,1962-05-19,1986-01-01
+Keith Jarret, true ,1945-05-08,1968-04-01
+2
+Life Between the Exit Signs,Jazz,800000,./Datos/Imagenes/KeithJarrett1.jpg,43,1968-04-01
+The Köln Concert,Jazz,1750000,./Datos/Imagenes/KeithJarrett2.jpg,66,1975-01-24
