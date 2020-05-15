@@ -3,6 +3,8 @@ package Modelo;
 import java.io.*;
 import java.util.*;
 
+import coleccionMusica.Modelo.ColeccionMusica;
+
 public class ColeccionMusica {
 
 	private String propietario;
@@ -63,10 +65,10 @@ public class ColeccionMusica {
     /*
      COMPLETAR: Completar método
     */
-    public String generoMasAlbumes()
+    public String generoMasAlbumes() /*LISTO ac*/
     {
         String nombreGenero ="";
-        int cuantosSalsa=0, cuantosEspiritual=0, cuantosJazz=0,cuantosRock=0;    
+        int cuantosSalsa=0, cuantosEspiritual=0, cuantosJazz=0,cuantosRock=0,mayor=0;    
         
         /* 1. recorrer  todos los artistas */
         for(int i = 0; i < artistas.size(); i++)
@@ -76,12 +78,29 @@ public class ColeccionMusica {
             cuantosSalsa += artistas.get(i).contarAlbumesGenero(ColeccionMusica.GENERO_SALSA);
             cuantosEspiritual += artistas.get(i).contarAlbumesGenero(ColeccionMusica.GENERO_ESPIRITUAL);
             cuantosJazz += artistas.get(i).contarAlbumesGenero(ColeccionMusica.GENERO_JAZZ);
-            cuantosRock += artistas.get(i).contarAlbumesGenero(ColeccionMusica.GENERO_ROCK);            
+            cuantosRock += artistas.get(i).contarAlbumesGenero(ColeccionMusica.GENERO_ROCK);  
+           
         }
         /* 3. determinar cuál genero tiene mayor cantidad de álbumes y devolver el nombre
         */
+        if (cuantosSalsa>mayor) {
+			mayor=cuantosSalsa;
+			nombreGenero=GENERO_SALSA;
+		}
+        if (cuantosEspiritual>mayor) {
+        	mayor=cuantosEspiritual;
+			nombreGenero=GENERO_ESPIRITUAL;
+		}
+        if (cuantosJazz>mayor) {
+        	mayor=cuantosJazz;
+			nombreGenero=GENERO_JAZZ;
+		}
+        if (cuantosRock>mayor) {
+			mayor=cuantosRock;
+			nombreGenero=GENERO_ROCK;
+		}
         
-                
+  
       return nombreGenero;  
     } 
     

@@ -2,6 +2,8 @@ package Modelo;
 
 import java.util.*;
 
+import coleccionMusica.Modelo.Album;
+
 public class Artista {
 	
 	/* atributos */
@@ -94,7 +96,15 @@ public class Artista {
         }
         return elAlbum;
     }
-
+    
+    public ArrayList<Album> getAlbum(){/*ac*/
+    	return albumes;
+    }
+    
+    public void setAlbumes(ArrayList<Album> albumes) {/*ac*/
+        this.albumes = albumes;
+    } 
+    
     public String getNombre() {
         return nombre;
     }
