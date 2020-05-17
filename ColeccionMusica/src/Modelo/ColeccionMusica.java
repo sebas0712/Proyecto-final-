@@ -109,12 +109,36 @@ public class ColeccionMusica {
      * @param pGenero: Nombre del Género: Salsa, Rock, Jazz o Religiosa
      * @return lista de artistas que pertenecen de ese género
      */
-    public ArrayList<Album> albumesPorGenero(String pGenero)
+    public ArrayList<Album> albumesPorGenero(String pGenero)/*LISTO*/
     {
         ArrayList<Album> Resultado = new ArrayList<Album>();
         /*
-        Completar...
+        Completar... Completed
         */
+
+        /*Recorre todos los artistas*/
+        for (int i = 0; i < artistas.size(); i++) {
+        	/*Recorre todos los albumes del artista*/
+			for (int j = 0; j < artistas.get(i).getAlbum().size(); j++) {
+				/*Verifica que albumes son del genero ingresado*/					
+				if (artistas.get(i).getAlbum().get(j).getGenero().equalsIgnoreCase(pGenero)) {
+					Album resultado = new Album(artistas.get(i).getAlbum().get(j).getTitulo(), 
+												artistas.get(i).getAlbum().get(j).getGenero(),
+												artistas.get(i).getAlbum().get(j).getImagen(),
+												artistas.get(i).getAlbum().get(j).getDuracion(),
+												artistas.get(i).getAlbum().get(j).getFechaLanzamiento());
+					Resultado.add(resultado);
+					
+				}			
+
+			}
+        	
+		}
+        /*PRUEBA de que guarda
+        for (int i = 0; i < Resultado.size(); i++) {
+			System.out.println(Resultado.get(i).getTitulo());
+		}*/
+        
         return Resultado;
     }
     
@@ -170,7 +194,7 @@ public class ColeccionMusica {
     }
     
     /* Modificar método para que se adecúe al acrhivo de entrada */
-    public void CargarInformacion(String rutaArchivo)
+    public void CargarInformacion(String rutaArchivo) /*LISTO*/
     {
         try {
             
@@ -188,7 +212,7 @@ public class ColeccionMusica {
             
             /* leer número de artistas que se van a leer: */
             int numArtistas =  Integer.parseInt(br.readLine().trim());
-            
+           
             /* leer información del primer artista:*/
             for(int i = 0; i < numArtistas; i++)
             {
@@ -201,11 +225,33 @@ public class ColeccionMusica {
                     Fecha fechaNac = convertirFecha(fechaNacArtista);            
                     Fecha fechaDebut = convertirFecha(fechaDebutArtista);            
                     Artista nuevoArtista = new Artista(nombreArtista, activo, fechaNac, fechaDebut);
-                    artistas.add(nuevoArtista);
-            }
+                    artistas.add(nuevoArtista);                    
             
-            br.close();
+            }                      
+  
+         
+            /*Lee informacion del album del ultimo artista*/
+            int ultimo = artistas.size()-1;
+            int numAlbum = Integer.parseInt(br.readLine());
             
+            /*Leer informacion de albumes*/           
+			for (int j = 0; j < numAlbum; j++) {//Life Between the Exit Signs,Jazz,./Datos/Imagenes/KeithJarrett1.jpg,43,1968-04-01
+			linea = br.readLine().trim();
+			String datosAlbum[] = linea.split(",");
+			String nombreAlbum = datosAlbum[0];//"Life Between the Exit Signs"
+			String generoAlbum = datosAlbum[1];//Jazz
+			//800000??
+			String rutaImagen = datosAlbum[2].trim();//./Datos/Imagenes/KeithJarrett1.jpg
+			int duracionAlbum = Integer.parseInt(datosAlbum[3].trim());//43 minutos?
+			String fechaLanAlbum[] = datosAlbum[4].trim().split("-");//{1968-04-04}
+			Fecha fechaLan = convertirFecha(fechaLanAlbum);
+			
+			//Album nuevoAlbum = new Album(nombreAlbum,generoAlbum,rutaImagen,duracionAlbum,fechaLan);
+			artistas.get(ultimo).agregarAlbum(nombreAlbum,generoAlbum,rutaImagen,duracionAlbum,fechaLan);
+			
+		}
+              
+            br.close();           
             
         } catch (FileNotFoundException ex) {
             
@@ -230,8 +276,8 @@ public class ColeccionMusica {
         // TODO code application logic here
         ColeccionMusica miColeccion = new ColeccionMusica();         
         miColeccion.CargarInformacion("./Datos/DatosIniciales1.txt");
-        System.out.print("El artista con mas alnnbnmbumes es: "+miColeccion.artistaMasAlbumes());
-        
+        System.out.print("El artista con mas albumes es: "+miColeccion.artistaMasAlbumes());
+        /*si quieres puedes probar imprimir los datos que se cargaron para ver si funciona*/
     }
 
 	

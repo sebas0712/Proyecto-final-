@@ -48,8 +48,10 @@ public class Artista {
         albumes = new ArrayList<Album>();
     }
     
-    public void agregarAlbum(Album nuevoAlbum)
+    /*modificado*/
+    public void agregarAlbum(String nombreAlbum,String generoAlbum,String rutaImagen,int duracionAlbum,Fecha fechaLan)
     {
+    	Album nuevoAlbum = new Album(nombreAlbum,generoAlbum,rutaImagen,duracionAlbum,fechaLan);
         albumes.add(nuevoAlbum);
     }
     
