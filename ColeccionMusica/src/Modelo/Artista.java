@@ -109,6 +109,35 @@ public class Artista {
 		}
     }
     
+    /*Permite retroceder en la lista de albumes del artista*/
+    public Album anteriorAlbum() throws Exception{
+    	
+    	Album anterior = null;
+    	
+    	if (numAlbumes()==0 || posicionAlbumActual<=0) {
+			throw new Exception("No hay mas albumes anteriores");
+		}else {
+			posicionAlbumActual--;
+			anterior = albumes.get(posicionAlbumActual);
+		}
+    	
+    	return anterior;
+    }
+    
+    /*Permite avanzar en la lista de albumes del artista*/
+    public Album siguienteAlbum() throws Exception{
+    	
+    	Album siguiente = null;
+    	
+    	if (posicionAlbumActual >= numAlbumes()-1) {
+			throw new Exception("No hay mas albumes siguientes");
+		}else {
+			posicionAlbumActual++;
+			siguiente = albumes.get(posicionAlbumActual);
+		}
+    	return siguiente;
+    }
+    
     public Album buscarAlbum2(String nombreAlbum)
     {
         Album elAlbum=null;
