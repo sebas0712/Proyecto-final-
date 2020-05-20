@@ -10,16 +10,20 @@ public class ColeccionMusica {
 	private String propietario;
     private Fecha fechaCreacion;
     private ArrayList<Artista> artistas;
+    private int posicionArtistaActual;
     
     public static final String GENERO_SALSA="Salsa";
     public static final String GENERO_ROCK="Rock";
     public static final String GENERO_JAZZ="Jazz";
     public static final String GENERO_ESPIRITUAL="Espiritual";
 
-    public ColeccionMusica(String propietario, Fecha fechaCreacion) {
+    
+    /*Crea la coleccion de musica con sus respectivos datos e informacion inicial*/
+    public ColeccionMusica(String propietario, Fecha fechaCreacion, String rutaArchivo) {
         this.propietario = propietario;
         this.fechaCreacion = fechaCreacion;
         artistas = new ArrayList<Artista>();
+        CargarInformacion(rutaArchivo);
     } 
     
     public ColeccionMusica()
@@ -167,6 +171,65 @@ public class ColeccionMusica {
             }
         }        
         return elArtista;
+    }
+    
+    /*Retorna el artista en la posicion actual de la coleccion de musica*/
+    public Artista darArtistaActual() {
+    	
+    	Artista artista;
+    	
+    	if (darNumeroArtistas()==0) {
+			artista = null;
+		}
+    	else {
+			artista = artistas.get(posicionArtistaActual);
+		}
+    	
+    	return artista;
+    }
+    
+    /*Permite retroceder en la lista de artista de la coleccion de musica*/
+    public Artista anteriorArtista() throws Exception{
+    	
+    	Artista anterior = null;
+    	
+    	if (darNumeroArtistas() == 0 || posicionArtistaActual <= 0) {
+			throw new Exception ("No hay mas artistas anteriores");
+		}else {
+			posicionArtistaActual--;
+			anterior = artistas.get(posicionArtistaActual);
+		}
+    	
+    	return anterior;
+    }
+    
+    /*Permite avanzar en la lista de artista de la coleccion de musica*/
+    public Artista siguienteArtista() throws Exception{
+    	
+    	Artista siguiente = null;
+    	
+    	if (posicionArtistaActual >= darNumeroArtistas()-1) {
+			throw new Exception("No hay mas artistas siguientes");
+		}else {
+			posicionArtistaActual++;
+			siguiente = artistas.get(posicionArtistaActual);
+		}
+    	return siguiente;
+    }
+    
+    /*Permite ir a un album de la lista del artista actual*/
+    public void irAAlbum(int pIndice) throws Exception{
+    	
+    	if (darNumeroArtistas() == 0) {
+			throw new Exception("No hay artistas");
+		}else {
+			Artista actual = darArtistaActual();
+			actual.irAAlbum(pIndice);
+		}
+    }
+    
+    public int darNumeroArtistas() {
+    	return artistas.size();
     }
 
     public ArrayList<Artista> getArtistas() {

@@ -10,14 +10,7 @@ public class Artista {
     private String nombre;
     private boolean estaActivo;
     private String rutaImagen;
-
-    public String getImagen() {
-        return rutaImagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.rutaImagen = imagen;
-    }
+    private int posicionAlbumActual;
     
     /* asociaciones con Fecha */
     private Fecha fechaNacimiento;    
@@ -86,6 +79,36 @@ public class Artista {
         return albumes.size();
     }
     
+    /*Retorna el album en la posicion actual del artista*/
+    public Album darAlbumActual() {
+    	
+    	Album album;
+    	if (numAlbumes()==0) {
+    		album = null;
+		}else {
+			album = albumes.get(posicionAlbumActual);
+		}
+    	
+    	return album;
+    }
+    
+    /*Permite ir a un album de la lista en el artista*/
+    public void irAAlbum(int indice) throws Exception{
+    	
+    	if (numAlbumes()==0) {
+    		
+			throw new Exception("No hay albumes");
+			
+		}else if (posicionAlbumActual==indice) {
+			
+			throw new Exception("Ya se encuentra en este album");
+			
+		}else {
+			
+			posicionAlbumActual=indice;
+		}
+    }
+    
     public Album buscarAlbum2(String nombreAlbum)
     {
         Album elAlbum=null;
@@ -106,6 +129,14 @@ public class Artista {
     public void setAlbumes(ArrayList<Album> albumes) {/*ac*/
         this.albumes = albumes;
     } 
+    
+    public String getImagen() {
+        return rutaImagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.rutaImagen = imagen;
+    }
     
     public String getNombre() {
         return nombre;
